@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Chat App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 350px;
+      height: 500px;
+      background: #fff;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .chat-header {
+      background: #4a90e2;
+      color: #fff;
+      padding: 12px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      background: #f9f9f9;
+    }
+
+    .message {
+      margin: 5px 0;
+      padding: 8px 12px;
+      border-radius: 8px;
+      max-width: 70%;
+      clear: both;
+    }
+
+    .user {
+      background: #4a90e2;
+      color: #fff;
+      float: right;
+    }
+
+    .bot {
+      background: #e4e6eb;
+      float: left;
+    }
+
+    .chat-footer {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-footer input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .chat-footer button {
+      margin-left: 8px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 8px;
+      background: #4a90e2;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="chat-container">
+  <div class="chat-header">💬 Simple Chat</div>
+  <div class="chat-body" id="chat-body">
+    <div class="message bot">Hello! 👋</div>
+  </div>
+  <div class="chat-footer">
+    <input type="text" id="chat-input" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+  function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const chatBody = document.getElementById('chat-body');
+    const text = input.value.trim();
+    if (text === "") return;
+
+    // Create user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'message user';
+    userMsg.innerText = text;
+    chatBody.appendChild(userMsg);
+
+    // Auto-scroll
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    // Clear input
+    input.value = '';
+
+    // Optional: bot reply
+    setTimeout(() => {
+      const botMsg = document.createElement('div');
+      botMsg.className = 'message bot';
+      botMsg.innerText = "Bot: I received your message!";
+      chatBody.appendChild(botMsg);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }, 500);
+  }
+</script>
+
+</body>
+</html>

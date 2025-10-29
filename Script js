@@ -1,0 +1,27 @@
+function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const chatBody = document.getElementById('chat-body');
+  const text = input.value.trim();
+  if (text === "") return;
+
+  // Create user message
+  const userMsg = document.createElement('div');
+  userMsg.className = 'message user';
+  userMsg.innerText = text;
+  chatBody.appendChild(userMsg);
+
+  // Auto-scroll
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  // Clear input
+  input.value = '';
+
+  // Optional: bot reply
+  setTimeout(() => {
+    const botMsg = document.createElement('div');
+    botMsg.className = 'message bot';
+    botMsg.innerText = "Bot: I received your message!";
+    chatBody.appendChild(botMsg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }, 500);
+}
